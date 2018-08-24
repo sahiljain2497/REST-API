@@ -2,8 +2,9 @@ const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
 const Product = require('../models/product')
+
 router.get('/',(req,res,next) =>{
-     Product.find().exec().then(doc => {res.status(200).json(doc)}).catch(err => {console.log(err)})
+     Product.find().select('price name _id').exec().then(doc => {res.status(200).json(doc)}).catch(err => {console.log(err)})
 });
 
 router.post('/',(req,res,next) =>{
@@ -32,8 +33,7 @@ router.delete('/:productId',(req,res,next) => {
 })
 
 router.get('/:productId',(req,res,next) => {
-    const idd = req.params.productId;
-    Product.findById(id).exec().then(doc => {res.status(200).json(doc)}).catch(err => {console.log(err)})
+    Product.findById(req.params.productId).exec().then(doc => {res.status(200).json(doc)}).catch(err => {console.log(err)})
 })
 router.patch('/:productId',(req,res,next) => {
     res.status(200).json({

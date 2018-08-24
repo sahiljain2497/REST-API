@@ -10,6 +10,7 @@ mongoose.connect("mongodb://localhost:27017/RESTAPI", function (err, db) {
     }
      //Write databse Insert/Update/Query code here..
 })
+mongoose.Promise = global.Promise;
 //import routes  here
 const orderRoutes = require('./api/routes/order');
 const productRoutes = require('./api/routes/product');
